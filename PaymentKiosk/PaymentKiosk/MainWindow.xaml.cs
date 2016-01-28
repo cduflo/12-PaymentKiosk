@@ -2,6 +2,7 @@
 using PaymentKiosk.Core.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,40 +23,71 @@ namespace PaymentKiosk
     /// </summary>
     public partial class MainWindow : Window
     {
+        decimal total;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            comboBoxPRod.ItemsSource = Coffee.coffee;
+            comboBoxPRod.DisplayMemberPath = "Description";
+
+            comboBoxQuant.ItemsSource = Quantity.quantity;
+
+            dataGrid.ItemsSource = runninglist;
+            dataGrid.IsReadOnly = true;
+            dataGrid.Columns.Add(addColumn("Item", "Description"));
+            dataGrid.Columns.Add(addColumn("Price", "amount"));
         }
 
-        private void buttonSubmit_Click(object sender, RoutedEventArgs e)
+        private DataGridTextColumn addColumn(string header, string source)
         {
-            var customer = new Customer
-            {
-                Name = textBoxCustName.Text,
-                Telephone = textBoxCustTel.Text
-            };
+            DataGridTextColumn x = new DataGridTextColumn();
+            x.Header = header;
+            x.Binding = new Binding(source);
+            return x;
+        }
 
-            var creditCard = new CreditCard
-            {
-                CardNum = textBoxCCNum.Text,
-                Expiration = textBoxExpiration.Text
-            };
+        private void buttonCharge_Click(object sender, RoutedEventArgs e)
+        {
+            Payment_Window paywin = new Payment_Window(total);
+            paywin.Owner = this;
+            paywin.Show();
+        }
 
+        public ObservableCollection<Product> runninglist = new ObservableCollection<Product>();
+
+        public void buttonAddItems_Click(object sender, RoutedEventArgs e)
+        {
             try
             {
-                bool success = MoneyService.Charge(customer, creditCard, decimal.Parse(textBoxAmount.Text));
-                if (success)
+                for (var i = 0; i < (int)comboBoxQuant.SelectedItem; i++)
                 {
-                    var message = "Payment Successful";
-                    MessageBox.Show(message);
-                    SmsService.SendSms(textBoxCustTel.Text, message);
+                    runninglist.Add((Product)comboBoxPRod.SelectedItem);
                 }
+
+                comboBoxQuant.SelectedItem = null;
+                comboBoxPRod.SelectedItem = null;
+
+                total = 0;
+                foreach (var x in runninglist)
+                {
+                    total += x.amount;
+                }
+
+                textBlockTotalAmt.Text = total.ToString();
             }
-            catch (Exception f)
+            catch
             {
-                MessageBox.Show(f.Message);
-                SmsService.SendSms(textBoxCustTel.Text, f.Message);
+                MessageBox.Show("Please enter a product and a quantity.");
             }
         }
+
+        public static void SuccessfulTransaction()
+        {
+            var message = "Payment Successful";
+            MessageBox.Show(message);
+        }
+
     }
 }
