@@ -7,21 +7,29 @@
         mc:Ignorable="d"
         Title="Payment_Window" Height="447.297" Width="324.324" Closing="Window_Closing">
     <Grid>
-        <Label x:Name="label" Content="Customer Information" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="139"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="259" Margin="6,147,0,0" VerticalAlignment="Top" Width="300"/>
+
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="100" Margin="5,23,0,0" VerticalAlignment="Top" Width="301"/>
+
+        <Label x:Name="label" Content="Customer Information" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="128" Background="White"/>
         <Label x:Name="labelCustName" Content="Customer Name" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="139"/>
         <Label x:Name="labelCustName_Copy" Content="Customer Telephone" HorizontalAlignment="Left" Margin="158,41,0,0" VerticalAlignment="Top" Width="139"/>
         <TextBox x:Name="textBoxCustName" HorizontalAlignment="Left" Height="23" Margin="10,72,0,0" TextWrapping="Wrap" Text="Christopher Duflo" VerticalAlignment="Top" Width="139"/>
         <TextBox x:Name="textBoxCustTel" HorizontalAlignment="Left" Height="23" Margin="158,72,0,0" TextWrapping="Wrap" Text="+18609226167" VerticalAlignment="Top" Width="139"/>
-        <Label x:Name="label_Copy" Content="Payment Information" HorizontalAlignment="Left" Margin="10,133,0,0" VerticalAlignment="Top" Width="139"/>
+        <Label x:Name="label_Copy" Content="Payment Information" HorizontalAlignment="Left" Margin="10,133,0,0" VerticalAlignment="Top" Width="128" Background="White"/>
         <Label x:Name="label_Copy1" Content="Charge amount ($)" HorizontalAlignment="Left" Margin="10,164,0,0" VerticalAlignment="Top" Width="139"/>
         <Label x:Name="label_Copy2" Content="Credit Card Number" HorizontalAlignment="Left" Margin="10,228,0,0" VerticalAlignment="Top" Width="139"/>
-        <TextBox x:Name="textBoxAmount" HorizontalAlignment="Left" Height="23" Margin="10,195,0,0" TextWrapping="Wrap" Text="5000.34" VerticalAlignment="Top" Width="139"/>
+        <TextBox x:Name="textBoxAmount" HorizontalAlignment="Left" Height="23" Margin="14,195,0,0" TextWrapping="Wrap" Text="5000.34" VerticalAlignment="Top" Width="135"/>
         <TextBox x:Name="textBoxCCNum" HorizontalAlignment="Left" Height="23" Margin="10,259,0,0" TextWrapping="Wrap" Text="4242424242424242" VerticalAlignment="Top" Width="287"/>
         <Label x:Name="label_Copy3" Content="Expiry Date (MM/YY)" HorizontalAlignment="Left" Margin="10,293,0,0" VerticalAlignment="Top" Width="139"/>
         <TextBox x:Name="textBoxExpiration" HorizontalAlignment="Left" Height="23" Margin="10,324,0,-17" TextWrapping="Wrap" Text="01/19" VerticalAlignment="Top" Width="139"/>
         <Label x:Name="label_Copy4" Content="Security Code" HorizontalAlignment="Left" Margin="158,293,0,0" VerticalAlignment="Top" Width="139"/>
         <TextBox x:Name="textBoxCVC" HorizontalAlignment="Left" Height="23" Margin="158,324,0,-17" TextWrapping="Wrap" Text="234" VerticalAlignment="Top" Width="139"/>
         <Button x:Name="buttonSubmit" Content="Process Payment" HorizontalAlignment="Left" Height="26" Margin="64,364,0,-60" VerticalAlignment="Top" Width="171" Click="buttonSubmit_Click"/>
+        <RadioButton x:Name="radioButton0" Content="0%" HorizontalAlignment="Left" Margin="165,199,0,0" VerticalAlignment="Top" Width="39" Checked="radioButton0_Checked"/>
+        <RadioButton x:Name="radioButton10" Content="10%" HorizontalAlignment="Left" Margin="253,199,0,0" VerticalAlignment="Top" Width="48" Checked="radioButton10_Checked"/>
+        <RadioButton x:Name="radioButton5" Content="5%" HorizontalAlignment="Left" Margin="209,199,0,0" VerticalAlignment="Top" Width="39" Checked="radioButton5_Checked"/>
+        <Label x:Name="label_Copy5" Content="Discount Percentage" HorizontalAlignment="Left" Margin="162,164,0,0" VerticalAlignment="Top" Width="139"/>
 
     </Grid>
 </Window>

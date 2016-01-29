@@ -22,11 +22,14 @@ namespace PaymentKiosk
     /// </summary>
     public partial class Payment_Window : Window
     {
-
+        decimal origtotal;
         public Payment_Window(decimal amount)
         {
             InitializeComponent();
-            textBoxAmount.Text = amount.ToString();
+            origtotal = amount;
+            textBoxAmount.Text = origtotal.ToString();
+            textBoxAmount.IsReadOnly = true;
+            radioButton0.IsChecked = true;
         }
 
         private void buttonSubmit_Click(object sender, RoutedEventArgs e)
@@ -63,6 +66,27 @@ namespace PaymentKiosk
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Owner = null;
+        }
+
+        private void radioButton10_Checked(object sender, RoutedEventArgs e)
+        {
+            if (radioButton0.IsChecked == true) { radioButton0.IsChecked = false; }
+            if (radioButton5.IsChecked == true) { radioButton5.IsChecked = false; }
+            textBoxAmount.Text = (Math.Round(origtotal-(origtotal * .10m),2)).ToString();
+        }
+
+        private void radioButton5_Checked(object sender, RoutedEventArgs e)
+        {
+            if (radioButton0.IsChecked == true) { radioButton0.IsChecked = false; }
+            if (radioButton10.IsChecked == true) { radioButton10.IsChecked = false; }
+            textBoxAmount.Text = (Math.Round(origtotal-(origtotal * .05m),2)).ToString();
+        }
+
+        private void radioButton0_Checked(object sender, RoutedEventArgs e)
+        {
+            if (radioButton10.IsChecked == true) { radioButton10.IsChecked = false; }
+            if (radioButton5.IsChecked == true) { radioButton5.IsChecked = false; }
+            textBoxAmount.Text = origtotal.ToString();
         }
     }
 }
